@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name" translatable="false">ShopPay</string>
+    <string name="app_name" translatable="false">test Shop</string>
     <string name="facebook_app_id" translatable="false">1686631971595434</string>
     <string name="android_key" translatable="false">AIzaSyB4b2hBDqGh6yakmERv95JNMuSGbvf20jo</string>
 
@@ -33,6 +33,7 @@
 
 
     <!-- Products related strings -->
+    <string name="Just_arrived">Just arrived</string>
     <string name="No_banners">No banners</string>
     <string name="Show_offers">Show offers</string>
     <string name="FILTER">FILTER</string>
@@ -47,16 +48,6 @@
     <string name="Select_size">Select size</string>
     <string name="Product">Product</string>
     <string name="All">All</string>
-
-    <!--Static drawer menu related-->
-    <string name="menu_myaccount">My Account</string>
-    <string name="menu_Settings">Settings</string>
-    <string name="menu_products">Buy Products</string>
-    <string name="menu_services">Services</string>
-    <string name="menu_paybills">Pay Bills</string>
-    <string name="menu_paygo">Pay As You Move</string>
-    <string name="menu_scanbarcode">Scan Bar Codes</string>
-    <string name="menu_trackmygoods">Track My Goods</string>
 
     <!-- Products sort options -->
     <string name="Recommended">Recommended</string>
@@ -173,12 +164,14 @@
     <string name="Select">Select</string>
     <string name="Open_source_libraries">Open source libraries</string>
     <string name="License_details_for_open_source_software">License details for open source software</string>
+    <string name="Privacy_policy">Privacy policy</string>
+    <string name="Basic_information_about_Privacy_Policy">Basic information about Privacy Policy</string>
     <string name="App_needs_to_be_restarted">To change the shop an app restart is needed.</string>
     <string name="including_VAT">inc. VAT</string>
     <string name="Thank_you_for_your_order">Thank you for your order</string>
     <string name="Wait_for_sms_or_email_order_confirmation">Wait for &lt;b>SMS&lt;/b> or &lt;b>email&lt;/b> order confirmation.</string>
     <string name="This_is_a_sample_app">This is a sample app</string>
-    <string name="Sample_app_description">Thank you for your time. To find out more about this project, please visit us here: <a href="http://glosoftgroup.com/shoppay">Shop Pay</a>.</string>
+    <string name="Sample_app_description">Thank you for your time. To find out more about this project, please visit us here: <a href="http://openshop.io/">Openshop.io</a>.</string>
     <string name="Link_is_invalid">Link is invalid</string>
     <string name="Min">Min</string>
     <string name="Max">Max</string>
@@ -206,7 +199,4 @@
     <string name="content_description_intro_screen">Intro screen</string>
     <string name="content_description_product_image">Product image</string>
     <string name="content_description_shipping_info">Shipping info</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

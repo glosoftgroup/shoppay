@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/shoppay.iml" filepath="$PROJECT_DIR$/shoppay.iml" />
+      <module fileurl="file://$PROJECT_DIR$/openshop.iml" filepath="$PROJECT_DIR$/openshop.iml" />
     </modules>
   </component>
 </project>

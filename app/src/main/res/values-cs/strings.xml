@@ -30,6 +30,7 @@
 
 
     <!-- Products related strings -->
+    <string name="Just_arrived">Právě dorazilo</string>
     <string name="No_banners">Žádné bannery</string>
     <string name="Show_offers">Zobrazit nabídky</string>
     <string name="FILTER">FILTR</string>
@@ -44,16 +45,6 @@
     <string name="Select_size">Vyberte velikost</string>
     <string name="Product">Produkt</string>
     <string name="All">Vše</string>
-
-    <!--Static drawer menu related-->
-    <string name="menu_myaccount">My Account</string>
-    <string name="menu_Settings">Settings</string>
-    <string name="menu_products">Buy Products</string>
-    <string name="menu_services">Services</string>
-    <string name="menu_paybills">Pay Bills</string>
-    <string name="menu_paygo">Pay As You Move</string>
-    <string name="menu_scanbarcode">Scan Bar Codes</string>
-    <string name="menu_trackmygoods">Track My Goods</string>
 
     <!-- Products sort options -->
     <string name="Recommended">Doporučené</string>
@@ -170,6 +161,8 @@
     <string name="Select">Vybrat</string>
     <string name="Open_source_libraries">Open source knihovny</string>
     <string name="License_details_for_open_source_software">Podrobné informace o licencích použitého open source softwaru</string>
+    <string name="Privacy_policy">Zásady ochrany osobních údajů</string>
+    <string name="Basic_information_about_Privacy_Policy">Základní informace o zásadě ochrany osobních údajů</string>
     <string name="App_needs_to_be_restarted">Pro změnu obchodu je nutné restartovat aplikaci.</string>
     <string name="including_VAT">s DPH</string>
     <string name="Thank_you_for_your_order">Děkujeme za Vaši objednávku.</string>
