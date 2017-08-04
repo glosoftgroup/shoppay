@@ -593,7 +593,6 @@ public class MainActivity extends AppCompatActivity implements DrawerFragment.Fr
         }
     }
 
-
     @Override
     public void onBackPressed() {
         // If back button pressed, try close drawer if exist and is open. If drawer is already closed continue.

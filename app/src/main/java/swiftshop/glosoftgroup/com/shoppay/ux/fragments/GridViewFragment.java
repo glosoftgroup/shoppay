@@ -63,7 +63,7 @@ public class GridViewFragment extends Fragment{
 
         //Initialize with empty data
         mGridData = new ArrayList<>();
-        mGridAdapter = new GridViewAdapter(this, R.layout.grid_item_layout, mGridData);
+        mGridAdapter = new GridViewAdapter(this.getContext(), R.layout.grid_item_layout, mGridData);
         mGridView.setAdapter(mGridAdapter);
 
 

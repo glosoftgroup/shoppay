@@ -374,6 +374,12 @@ public class LoginDialogFragment extends DialogFragment implements FacebookCallb
 
     private void logInWithEmail(EditText editTextEmail, EditText editTextPassword) {
        Timber.d("loginwith email to be done later...... ");
+        User me=new User();
+        me.setEmail(editTextEmail.getText().toString());
+        me.setName("Dennis");
+        me.setId(125478);
+        me.setPhone("0712509826");
+        handleUserLogin(me);
     }
 
     private void handleUserLogin(User user) {
