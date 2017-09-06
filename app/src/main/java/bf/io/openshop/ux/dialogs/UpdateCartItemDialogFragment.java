@@ -159,7 +159,7 @@ public class UpdateCartItemDialogFragment extends DialogFragment {
     }
 
     private void getProductDetail(CartProductItem cartProductItem) {
-        String url = String.format(EndPoints.PRODUCTS_SINGLE, SettingsMy.getActualNonNullShop(getActivity()).getId(), cartProductItem.getVariant().getProductId());
+        String url = EndPoints.PRODUCTS_SINGLE+cartProductItem.getVariant().getProductId();
 
         setProgressActive(true);
 
@@ -293,7 +293,7 @@ public class UpdateCartItemDialogFragment extends DialogFragment {
             }
             Timber.d("update product: %s", jo.toString());
 
-            String url = String.format(EndPoints.CART_ITEM, SettingsMy.getActualNonNullShop(getActivity()).getId(), productCartId);
+            String url = EndPoints.CART_ITEM_UPDATE+productCartId;
 
             setProgressActive(true);
             JsonRequest req = new JsonRequest(Request.Method.PUT, url, jo, new Response.Listener<JSONObject>() {

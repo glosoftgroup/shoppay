@@ -27,10 +27,10 @@ import bf.io.openshop.listeners.OnSingleClickListener;
  * Adapter handling list of drawer items.
  */
 public class DrawerRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM_CATEGORY = 1;
     private static final int TYPE_ITEM_PAGE = 2;
-
     private final DrawerRecyclerInterface drawerRecyclerInterface;
     private LayoutInflater layoutInflater;
     private Context context;
@@ -56,10 +56,10 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         if (viewType == TYPE_ITEM_CATEGORY) {
             View view = layoutInflater.inflate(R.layout.list_item_drawer_category, parent, false);
             return new ViewHolderItemCategory(view, drawerRecyclerInterface);
-        } else if (viewType == TYPE_ITEM_PAGE) {
+        /*} else if (viewType == TYPE_ITEM_PAGE) {
             View view = layoutInflater.inflate(R.layout.list_item_drawer_page, parent, false);
             return new ViewHolderItemPage(view, drawerRecyclerInterface);
-        } else {
+        */} else {
             View view = layoutInflater.inflate(R.layout.list_item_drawer_header, parent, false);
             return new ViewHolderHeader(view, drawerRecyclerInterface);
         }
@@ -73,6 +73,7 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             DrawerItemCategory drawerItemCategory = getDrawerItem(position);
             viewHolderItemCategory.bindContent(drawerItemCategory);
             viewHolderItemCategory.itemText.setText(drawerItemCategory.getName());
+            viewHolderItemCategory.menuIcon.setImageDrawable(drawerItemCategory.getMenuIcon());
             if (position == 1) {
                 viewHolderItemCategory.itemText.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
                 viewHolderItemCategory.itemText.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context, R.drawable.star), null, null, null);
@@ -87,13 +88,13 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             } else {
                 viewHolderItemCategory.subMenuIndicator.setVisibility(View.VISIBLE);
             }
-        } else if (holder instanceof ViewHolderItemPage) {
+        } /*else if (holder instanceof ViewHolderItemPage) {
             ViewHolderItemPage viewHolderItemPage = (ViewHolderItemPage) holder;
 
             DrawerItemPage drawerItemPage = getPageItem(position);
             viewHolderItemPage.bindContent(drawerItemPage);
             viewHolderItemPage.itemText.setText(drawerItemPage.getName());
-        } else if (holder instanceof ViewHolderHeader) {
+        }*/ else if (holder instanceof ViewHolderHeader) {
             ViewHolderHeader viewHolderHeader = (ViewHolderHeader) holder;
 
             User user = SettingsMy.getActiveUser();
@@ -201,6 +202,7 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public static class ViewHolderItemCategory extends RecyclerView.ViewHolder {
         public TextView itemText;
         public ImageView subMenuIndicator;
+        public ImageView menuIcon;
         public LinearLayout layout;
         private DrawerItemCategory drawerItemCategory;
         private View divider;
@@ -211,6 +213,7 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             subMenuIndicator = (ImageView) itemView.findViewById(R.id.drawer_list_item_indicator);
             layout = (LinearLayout) itemView.findViewById(R.id.drawer_list_item_layout);
             divider = itemView.findViewById(R.id.drawer_list_item_divider);
+            menuIcon=(ImageView)itemView.findViewById(R.id.menuIcon);
             itemView.setOnClickListener(new OnSingleClickListener() {
                 @Override
                 public void onSingleClick(View v) {

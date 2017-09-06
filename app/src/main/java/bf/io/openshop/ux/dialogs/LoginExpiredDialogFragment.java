@@ -9,12 +9,12 @@ import android.support.v4.app.DialogFragment;
 
 import bf.io.openshop.R;
 import bf.io.openshop.ux.MainActivity;
-import bf.io.openshop.ux.fragments.BannersFragment;
+import bf.io.openshop.ux.fragments.GeneralCategoriesFragment;
 import timber.log.Timber;
 
 /**
  * Dialog informs user about session timeout.
- * User is redirected to {@link BannersFragment}.
+ * User is redirected to {@link GeneralCategoriesFragment}.
  */
 public class LoginExpiredDialogFragment extends DialogFragment {
 

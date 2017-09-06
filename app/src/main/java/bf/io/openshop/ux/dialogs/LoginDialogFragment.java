@@ -332,6 +332,8 @@ public class LoginDialogFragment extends DialogFragment implements FacebookCallb
                 invokeResetPassword();
             }
         });
+
+        //invokeLoginWithEmail();//added
     }
 
     private void invokeFacebookLogin() {
@@ -393,7 +395,8 @@ public class LoginDialogFragment extends DialogFragment implements FacebookCallb
 
     private void logInWithEmail(EditText editTextEmail, EditText editTextPassword) {
         SettingsMy.setUserEmailHint(editTextEmail.getText().toString());
-        String url = String.format(EndPoints.USER_LOGIN_EMAIL, SettingsMy.getActualNonNullShop(getActivity()).getId());
+        //String url = String.format(EndPoints.USER_LOGIN_EMAIL, SettingsMy.getActualNonNullShop(getActivity()).getId());
+        String url=EndPoints.USER_LOGIN_EMAIL;
         progressDialog.show();
 
         JSONObject jo;

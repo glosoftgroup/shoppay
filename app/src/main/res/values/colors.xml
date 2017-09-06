@@ -2,9 +2,9 @@
 <resources>
     <color name="colorPrimaryLight">#b4b4b4</color>
     <!-- Toolbar -->
-    <color name="colorPrimary">#039BE5</color>
+    <color name="colorPrimary">#029e1c</color>
     <!-- Status bar -->
-    <color name="colorPrimaryDark">#0288D1</color>
+    <color name="colorPrimaryDark">#046e19</color>
     <!-- Navigation bar-->
     <color name="navigationBarColor">#29b6f6</color>
 

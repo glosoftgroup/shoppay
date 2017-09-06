@@ -78,7 +78,7 @@
                 android:gravity="center"
                 android:lines="2"
                 android:paddingTop="20dp"
-                android:text="@string/Select_the_country_where_you_want_to_shop"
+                android:text="\n\n"
                 android:textColor="@color/textIconColorPrimary"
                 android:textSize="18sp"
                 android:textStyle="normal"/>
@@ -91,6 +91,7 @@
                 android:layout_marginTop="@dimen/base_margin_vertical_half"
                 android:background="@drawable/spinner_selector_white"
                 android:spinnerMode="dialog"
+                android:visibility="invisible"
                 tools:visibility="visible"/>
 
             <Button

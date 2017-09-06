@@ -3,7 +3,6 @@ package bf.io.openshop.ux.fragments;
 
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -22,24 +21,16 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import bf.io.openshop.CONST;
 import bf.io.openshop.MyApplication;
 import bf.io.openshop.R;
-import bf.io.openshop.SettingsMy;
-import bf.io.openshop.api.EndPoints;
-import bf.io.openshop.api.GsonRequest;
 import bf.io.openshop.entities.drawerMenu.DrawerItemCategory;
 import bf.io.openshop.entities.drawerMenu.DrawerItemPage;
-import bf.io.openshop.entities.drawerMenu.DrawerResponse;
 import bf.io.openshop.interfaces.DrawerRecyclerInterface;
 import bf.io.openshop.interfaces.DrawerSubmenuRecyclerInterface;
-import bf.io.openshop.utils.MsgUtils;
 import bf.io.openshop.ux.adapters.DrawerRecyclerAdapter;
 import bf.io.openshop.ux.adapters.DrawerSubmenuRecyclerAdapter;
 import timber.log.Timber;
@@ -282,9 +273,26 @@ public class DrawerFragment extends Fragment {
         drawerLoading = true;
         drawerProgress.setVisibility(View.VISIBLE);
         drawerRetryBtn.setVisibility(View.GONE);
+        drawerRecyclerAdapter.addDrawerItem(new DrawerItemCategory(1, getString(R.string.Just_arrived)));
+        List<DrawerItemCategory> navigation=new ArrayList<>();
+        navigation.add(new DrawerItemCategory(1,"MY ACCOUNT",getContext().getResources().getDrawable(R.drawable.avarter)));
+        navigation.add(new DrawerItemCategory(2,"PRODUCTS",getContext().getResources().getDrawable(R.drawable.products)));
+        navigation.add(new DrawerItemCategory(3,"SERVICES",getContext().getResources().getDrawable(R.drawable.services)));
+        navigation.add(new DrawerItemCategory(4,"ONE TAP",getContext().getResources().getDrawable(R.drawable.onetap)));
+        navigation.add(new DrawerItemCategory(5,"TRACK GOODS",getContext().getResources().getDrawable(R.drawable.track)));
+        drawerRecyclerAdapter.addDrawerItemList(navigation);
+        drawerRecyclerAdapter.addPageItemList(null);
+        drawerRecyclerAdapter.notifyDataSetChanged();
 
-        String url = String.format(EndPoints.NAVIGATION_DRAWER, SettingsMy.getActualNonNullShop(getActivity()).getId());
-        GsonRequest<DrawerResponse> getDrawerMenu = new GsonRequest<>(Request.Method.GET, url, null, DrawerResponse.class, new Response.Listener<DrawerResponse>() {
+        if (drawerListener != null)
+            drawerListener.prepareSearchSuggestions(navigation);
+
+        drawerLoading = false;
+        if (drawerRecycler != null) drawerRecycler.setVisibility(View.VISIBLE);
+        if (drawerProgress != null) drawerProgress.setVisibility(View.GONE);
+
+        /*String url = String.format(EndPoints.NAVIGATION_DRAWER, SettingsMy.getActualNonNullShop(getActivity()).getId());
+        GsonRequest<DrawerResponse> getDrawerMenu = new GsonRequest<>(Request.Method.GET,"http://android.babaviz.com/PS254/", null, DrawerResponse.class, new Response.Listener<DrawerResponse>() {
             @Override
             public void onResponse(@NonNull DrawerResponse drawerResponse) {
                 drawerRecyclerAdapter.addDrawerItem(new DrawerItemCategory(BANNERS_ID, BANNERS_ID, getString(R.string.Just_arrived)));
@@ -310,7 +318,7 @@ public class DrawerFragment extends Fragment {
         });
         getDrawerMenu.setRetryPolicy(MyApplication.getDefaultRetryPolice());
         getDrawerMenu.setShouldCache(false);
-        MyApplication.getInstance().addToRequestQueue(getDrawerMenu, CONST.DRAWER_REQUESTS_TAG);
+        MyApplication.getInstance().addToRequestQueue(getDrawerMenu, CONST.DRAWER_REQUESTS_TAG);*/
     }
 
     private void animateSubListHide() {
@@ -387,7 +395,7 @@ public class DrawerFragment extends Fragment {
     public interface FragmentDrawerListener {
 
         /**
-         * Launch {@link BannersFragment}. If fragment is already launched nothing happen.
+         * Launch {@link GeneralCategoriesFragment}. If fragment is already launched nothing happen.
          */
         void onDrawerBannersSelected();
 

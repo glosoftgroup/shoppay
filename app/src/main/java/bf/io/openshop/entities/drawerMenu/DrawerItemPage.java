@@ -5,6 +5,7 @@ public class DrawerItemPage {
     private long id;
     private String name;
 
+    //DrawerItemPage{id,name}
     public DrawerItemPage(long id, String name) {
         this.id = id;
         this.name = name;

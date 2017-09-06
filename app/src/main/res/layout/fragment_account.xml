@@ -132,7 +132,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/Branches"/>
+                    android:text="@string/Branches"
+                    android:visibility="gone"/>
 
                 <View
                     android:layout_width="@dimen/base_margin"
@@ -144,7 +145,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/Settings"/>
+                    android:text="@string/Settings"
+                    android:visibility="gone"/>
             </LinearLayout>
 
             <Button

@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -23,7 +23,7 @@ import timber.log.Timber;
 /**
  * Adapter handling list of banner items.
  */
-public class BannersRecyclerAdapter extends RecyclerView.Adapter<BannersRecyclerAdapter.ViewHolder> {
+public class GeneralCategoriesRecyclerAdapter extends RecyclerView.Adapter<GeneralCategoriesRecyclerAdapter.ViewHolder> {
 
     private final BannersRecyclerInterface bannersRecyclerInterface;
     private final Context context;
@@ -36,7 +36,7 @@ public class BannersRecyclerAdapter extends RecyclerView.Adapter<BannersRecycler
      * @param context                  activity context.
      * @param bannersRecyclerInterface listener indicating events that occurred.
      */
-    public BannersRecyclerAdapter(Context context, BannersRecyclerInterface bannersRecyclerInterface) {
+    public GeneralCategoriesRecyclerAdapter(Context context, BannersRecyclerInterface bannersRecyclerInterface) {
         this.context = context;
         this.bannersRecyclerInterface = bannersRecyclerInterface;
     }
@@ -54,7 +54,7 @@ public class BannersRecyclerAdapter extends RecyclerView.Adapter<BannersRecycler
     public void onBindViewHolder(ViewHolder holder, int position) {
         Banner banner = getBannerItem(position);
         holder.bindContent(banner);
-
+        holder.banner_name.setText(banner.getName());
         Picasso.with(context).load(banner.getImageUrl())
                 .placeholder(R.drawable.placeholder_loading)
                 .fit().centerInside()
@@ -99,10 +99,12 @@ public class BannersRecyclerAdapter extends RecyclerView.Adapter<BannersRecycler
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ResizableImageView bannerImage;
         private Banner banner;
+        public TextView banner_name;
 
         public ViewHolder(View itemView, final BannersRecyclerInterface bannersRecyclerInterface) {
             super(itemView);
             bannerImage = (ResizableImageView) itemView.findViewById(R.id.banner_image);
+            banner_name=(TextView)itemView.findViewById(R.id.banner_name);
             itemView.setOnClickListener(new OnSingleClickListener() {
                 @Override
                 public void onSingleClick(final View view) {

@@ -39,6 +39,7 @@ public class OrderFragment extends Fragment {
     private ProgressDialog progressDialog;
 
     private OrderRecyclerAdapter orderRecyclerAdapter;
+    private static Order order;
 
     /**
      * Create a new fragment instance, which displays the order history
@@ -46,9 +47,10 @@ public class OrderFragment extends Fragment {
      * @param orderId id of the order to load from server.
      * @return new fragment instance.
      */
-    public static OrderFragment newInstance(long orderId) {
+    public static OrderFragment newInstance(Order order_) {
         Bundle args = new Bundle();
-        args.putLong(ORDER_ID, orderId);
+        order=order_;
+        args.putLong(ORDER_ID, order.getId());
         OrderFragment fragment = new OrderFragment();
         fragment.setArguments(args);
         return fragment;
@@ -62,8 +64,9 @@ public class OrderFragment extends Fragment {
         progressDialog = Utils.generateProgressDialog(getActivity(), false);
         prepareOrder(view);
         if (getArguments() != null) {
-            long orderId = getArguments().getLong(ORDER_ID);
-            loadOrderDetail(orderId);
+            //long orderId = getArguments().getLong(ORDER_ID);
+            orderRecyclerAdapter.addOrder(order);
+            //loadOrderDetail(orderId);
         } else {
             Timber.e("Missing arguments with orderId");
         }

@@ -34,6 +34,7 @@ public class ShopSpinnerAdapter extends ArrayAdapter<Shop> {
      * @param shops         list of items.
      * @param viewTextWhite true if text should be white.
      */
+
     public ShopSpinnerAdapter(Activity activity, List<Shop> shops, boolean viewTextWhite) {
         super(activity, layoutID, shops);
         this.layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -64,7 +65,7 @@ public class ShopSpinnerAdapter extends ArrayAdapter<Shop> {
     }
 
     private View getCustomView(int position, View convertView, ViewGroup parent, boolean dropdown) {
-//        Timber.d("getView Position: " + position + ". ConvertView: " + convertView);
+        //Timber.d("getView Position: " + position + ". ConvertView: " + convertView);
         View v = convertView;
         ListItemHolder holder;
 

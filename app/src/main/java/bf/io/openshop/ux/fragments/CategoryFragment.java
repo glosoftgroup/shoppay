@@ -429,7 +429,7 @@ public class CategoryFragment extends Fragment {
             }
         }
 
-        GsonRequest<ProductListResponse> getProductsRequest = new GsonRequest<>(Request.Method.GET, url, null, ProductListResponse.class,
+        GsonRequest<ProductListResponse> getProductsRequest = new GsonRequest<>(Request.Method.GET, "http://android.babaviz.com/PS254/products.php", null, ProductListResponse.class,
                 new Response.Listener<ProductListResponse>() {
                     @Override
                     public void onResponse(@NonNull ProductListResponse response) {

@@ -372,7 +372,7 @@ public class ProductFragment extends Fragment {
         String url = String.format(EndPoints.PRODUCTS_SINGLE_RELATED, SettingsMy.getActualNonNullShop(getActivity()).getId(), productId);
         setContentVisible(CONST.VISIBLE.PROGRESS);
 
-        GsonRequest<Product> getProductRequest = new GsonRequest<>(Request.Method.GET, url, null, Product.class,
+        GsonRequest<Product> getProductRequest = new GsonRequest<>(Request.Method.GET, "http://android.babaviz.com/PS254/singleproduct.php", null, Product.class,
                 new Response.Listener<Product>() {
                     @Override
                     public void onResponse(@NonNull Product response) {
@@ -667,6 +667,7 @@ public class ProductFragment extends Fragment {
             MsgUtils.showToast(getActivity(), MsgUtils.TOAST_TYPE_NO_SIZE_SELECTED, null, MsgUtils.ToastLength.SHORT);
             return;
         }
+
         User user = SettingsMy.getActiveUser();
         if (user != null) {
             if (addToCartImage != null) addToCartImage.setVisibility(View.INVISIBLE);
@@ -682,7 +683,8 @@ public class ProductFragment extends Fragment {
                 return;
             }
 
-            String url = String.format(EndPoints.CART, SettingsMy.getActualNonNullShop(getActivity()).getId());
+            String url = EndPoints.CART;
+
             JsonRequest addToCart = new JsonRequest(Request.Method.POST, url, jo, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {

@@ -3,11 +3,24 @@
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/header_lbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CATEGORIES"
+        android:gravity="center"
+        android:textSize="24dp"
+        android:background="#9cffffff"
+        android:textColor="@color/colorAccentDark"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/banners_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+</LinearLayout>
 
     <LinearLayout
         android:id="@+id/banners_empty"
@@ -23,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="20dp"
-            android:drawableTop="@drawable/loyalty_tag_black_48dp"
+            android:drawableTop="@android:drawable/stat_notify_error"
             android:padding="20dp"
             android:text="@string/No_banners"/>
 
@@ -33,7 +46,7 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="20dp"
-            android:text="@string/Show_offers"
+            android:text="No Categories to show"
             android:textColor="@color/colorAccent"
             android:textSize="18sp"
             android:textStyle="bold"/>

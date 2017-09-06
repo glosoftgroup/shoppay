@@ -124,7 +124,7 @@ public class OrdersHistoryFragment extends Fragment {
             progressDialog.show();
             if (url == null) {
                 ordersHistoryRecyclerAdapter.clear();
-                url = String.format(EndPoints.ORDERS, SettingsMy.getActualNonNullShop(getActivity()).getId());
+                url = EndPoints.ORDERS;
             }
             GsonRequest<OrderResponse> req = new GsonRequest<>(Request.Method.GET, url, null, OrderResponse.class, new Response.Listener<OrderResponse>() {
                 @Override

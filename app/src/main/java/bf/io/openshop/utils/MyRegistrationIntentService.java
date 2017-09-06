@@ -108,6 +108,7 @@ public class MyRegistrationIntentService extends IntentService {
             }
         };
 
+
         JSONObject requestPost = new JSONObject();
         try {
             requestPost.put("platform", "android");

@@ -54,6 +54,7 @@ public class MyApplication extends Application {
      * @param lang language code.
      */
     public static void setAppLocale(String lang) {
+
         Resources res = mInstance.getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
         android.content.res.Configuration conf = res.getConfiguration();

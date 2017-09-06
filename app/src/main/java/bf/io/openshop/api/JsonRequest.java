@@ -7,6 +7,7 @@ import android.util.Base64;
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -38,6 +39,16 @@ public class JsonRequest extends JsonObjectRequest {
     private int requestStatusCode;
     private FragmentManager fragmentManager;
     private String requestUrl;
+
+    private static final String TAG = MyApplication.class.getSimpleName();
+
+
+    public static String APP_VERSION = "0.0.0";
+    public static String ANDROID_ID = "0000000000000000";
+
+    private static MyApplication mInstance;
+
+    private RequestQueue mRequestQueue;
 
     /**
      * Create a new authorized request.

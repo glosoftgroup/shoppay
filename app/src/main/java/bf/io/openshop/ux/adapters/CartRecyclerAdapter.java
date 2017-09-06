@@ -71,7 +71,6 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (layoutInflater == null)
             layoutInflater = LayoutInflater.from(parent.getContext());
-
         if (viewType == TYPE_ITEM_DISCOUNT) {
             View view = layoutInflater.inflate(R.layout.list_item_cart_discount, parent, false);
             return new ViewHolderDiscount(view, cartRecyclerInterface);

@@ -38,6 +38,7 @@ import com.android.volley.VolleyError;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.applinks.AppLinkData;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -112,6 +113,7 @@ public class SplashActivity extends AppCompatActivity {
      */
 
     private void init() {
+        SettingsMy.setActualShop(null);
         // Check if data connected.
         if (!MyApplication.getInstance().isDataConnected()) {
             progressDialog.hide();
@@ -133,7 +135,7 @@ public class SplashActivity extends AppCompatActivity {
             // Referrer is sent with first event.
 
             // Search for analytics data. General GA Campaign, and Facebook app links (if app links implemented on server side too).
-            Intent intent = this.getIntent();
+            /*Intent intent = this.getIntent();
             if (intent != null) {
                 Uri uri = intent.getData();
                 if (uri != null && uri.isHierarchical() && (uri.getQueryParameter("utm_source") != null || uri.getQueryParameter(REFERRER) != null)) {
@@ -186,9 +188,9 @@ public class SplashActivity extends AppCompatActivity {
                         Timber.e(e, "Fetch deferredAppLinkData  exception");
                     }
                 }
-            }
+            }*/
 
-            // If opened by notification. Try load shop defined by notification data. If error, just start shop with last used shop.
+           /* // If opened by notification. Try load shop defined by notification data. If error, just start shop with last used shop.
             if (this.getIntent() != null && this.getIntent().getExtras() != null && this.getIntent().getExtras().getString(EndPoints.NOTIFICATION_LINK) != null) {
                 Timber.d("Run by notification.");
                 String type = this.getIntent().getExtras().getString(EndPoints.NOTIFICATION_LINK, "");
@@ -236,11 +238,11 @@ public class SplashActivity extends AppCompatActivity {
                     Timber.e(e, "Skip Splash activity after notification error.");
                     startMainActivity(null);
                 }
-            } else {
+            } else {*/
                 // Nothing special. try continue to MainActivity.
                 Timber.d("Nothing special.");
                 startMainActivity(null);
-            }
+           // }
         }
     }
 
@@ -333,7 +335,18 @@ public class SplashActivity extends AppCompatActivity {
     private void requestShops() {
         if (layoutIntroScreen.getVisibility() != View.VISIBLE)
             progressDialog.show();
-        GsonRequest<ShopResponse> getShopsRequest = new GsonRequest<>(Request.Method.GET, EndPoints.SHOPS, null, ShopResponse.class,
+
+        Shop shop = new Shop();
+        shop.setId(1254);
+        shop.setName("Settings");
+        shop.setCurrency("KES");
+        List<Shop> shopList=new ArrayList<Shop>();
+        shopList.add(0,shop);
+        setSpinShops(shopList);
+        if (progressDialog != null) progressDialog.cancel();
+        animateContentVisible();
+
+        /*GsonRequest<ShopResponse> getShopsRequest = new GsonRequest<>(Request.Method.GET, EndPoints.SHOPS, null, ShopResponse.class,
                 new Response.Listener<ShopResponse>() {
                     @Override
                     public void onResponse(@NonNull ShopResponse response) {
@@ -352,7 +365,7 @@ public class SplashActivity extends AppCompatActivity {
         });
         getShopsRequest.setRetryPolicy(MyApplication.getDefaultRetryPolice());
         getShopsRequest.setShouldCache(false);
-        MyApplication.getInstance().addToRequestQueue(getShopsRequest, CONST.SPLASH_REQUESTS_TAG);
+        MyApplication.getInstance().addToRequestQueue(getShopsRequest, CONST.SPLASH_REQUESTS_TAG);*/
     }
 
     /**
@@ -377,7 +390,7 @@ public class SplashActivity extends AppCompatActivity {
                     if (item.getId() == CONST.DEFAULT_EMPTY_ID)
                         continueToShopBtn.setVisibility(View.INVISIBLE);
                     else {
-                        continueToShopBtn.setVisibility(View.VISIBLE);
+                        //continueToShopBtn.setVisibility(View.VISIBLE);
                     }
                 }
 
@@ -451,6 +464,28 @@ public class SplashActivity extends AppCompatActivity {
                                     animator.setDuration(1250);
                                     layoutContent.setVisibility(View.VISIBLE);
                                     animator.start();
+                                    animator.addListener(new Animator.AnimatorListener() {
+                                        @Override
+                                        public void onAnimationStart(Animator animator) {
+
+                                        }
+
+                                        @Override
+                                        public void onAnimationEnd(Animator animator) {
+                                            Shop selectedShop = (Shop) shopSelectionSpinner.getSelectedItem();
+                                            setShopInformationAndStartMainActivity(selectedShop, null);
+                                        }
+
+                                        @Override
+                                        public void onAnimationCancel(Animator animator) {
+
+                                        }
+
+                                        @Override
+                                        public void onAnimationRepeat(Animator animator) {
+
+                                        }
+                                    });
                                 } else {
                                     Timber.d("Alpha animation.");
                                     layoutContent.setAlpha(0f);

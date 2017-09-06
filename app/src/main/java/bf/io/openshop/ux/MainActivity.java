@@ -69,6 +69,7 @@ import bf.io.openshop.entities.cart.CartInfo;
 import bf.io.openshop.entities.drawerMenu.DrawerItemCategory;
 import bf.io.openshop.entities.drawerMenu.DrawerItemPage;
 import bf.io.openshop.entities.order.Order;
+import bf.io.openshop.entities.suppliers.Supplier;
 import bf.io.openshop.interfaces.LoginDialogInterface;
 import bf.io.openshop.utils.Analytics;
 import bf.io.openshop.utils.JsonUtils;
@@ -78,7 +79,7 @@ import bf.io.openshop.utils.Utils;
 import bf.io.openshop.ux.dialogs.LoginDialogFragment;
 import bf.io.openshop.ux.fragments.AccountEditFragment;
 import bf.io.openshop.ux.fragments.AccountFragment;
-import bf.io.openshop.ux.fragments.BannersFragment;
+import bf.io.openshop.ux.fragments.GeneralCategoriesFragment;
 import bf.io.openshop.ux.fragments.CartFragment;
 import bf.io.openshop.ux.fragments.CategoryFragment;
 import bf.io.openshop.ux.fragments.DrawerFragment;
@@ -88,6 +89,7 @@ import bf.io.openshop.ux.fragments.OrdersHistoryFragment;
 import bf.io.openshop.ux.fragments.PageFragment;
 import bf.io.openshop.ux.fragments.ProductFragment;
 import bf.io.openshop.ux.fragments.SettingsFragment;
+import bf.io.openshop.ux.fragments.SupplierFragment;
 import bf.io.openshop.ux.fragments.WishlistFragment;
 import timber.log.Timber;
 
@@ -97,20 +99,25 @@ import timber.log.Timber;
 public class MainActivity extends AppCompatActivity implements DrawerFragment.FragmentDrawerListener {
 
     public static final String MSG_MAIN_ACTIVITY_INSTANCE_IS_NULL = "MainActivity instance is null.";
+
+
     private static MainActivity mInstance = null;
 
     /**
      * Reference tied drawer menu, represented as fragment.
      */
     public DrawerFragment drawerFragment;
+
     /**
      * Indicate that app will be closed on next back press
      */
     private boolean isAppReadyToFinish = false;
+
     /**
      * Reference view showing number of products in shopping cart.
      */
     private TextView cartCountView;
+
     /**
      * Reference number of products in shopping cart.
      */
@@ -123,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements DrawerFragment.Fr
 
     // Fields used in searchView.
     private SimpleCursorAdapter searchSuggestionsAdapter;
+
+
     private ArrayList<String> searchSuggestionsList;
 
     /**
@@ -184,8 +193,8 @@ public class MainActivity extends AppCompatActivity implements DrawerFragment.Fr
         Timber.d("%s onCreate", MainActivity.class.getSimpleName());
 
         // Set app specific language localization by selected shop.
-        String lang = SettingsMy.getActualNonNullShop(this).getLanguage();
-        MyApplication.setAppLocale(lang);
+        //String lang = SettingsMy.getActualNonNullShop(this).getLanguage();
+        MyApplication.setAppLocale("English");
 
         setContentView(R.layout.activity_main);
 
@@ -225,7 +234,7 @@ public class MainActivity extends AppCompatActivity implements DrawerFragment.Fr
                 }
             }
         };
-        registerGcmOnServer();
+        //registerGcmOnServer();
         // end of GCM registration //
 
         addInitialFragment();
@@ -491,7 +500,7 @@ public class MainActivity extends AppCompatActivity implements DrawerFragment.Fr
      * When fragment stack is cleared {@link #clearBackStack}, this fragment will be shown.
      */
     private void addInitialFragment() {
-        Fragment fragment = new BannersFragment();
+        Fragment fragment = new GeneralCategoriesFragment();
         FragmentManager frgManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = frgManager.beginTransaction();
         fragmentTransaction.add(R.id.main_content_frame, fragment).commit();
@@ -553,9 +562,9 @@ public class MainActivity extends AppCompatActivity implements DrawerFragment.Fr
     public void onDrawerBannersSelected() {
         clearBackStack();
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.main_content_frame);
-        if (f == null || !(f instanceof BannersFragment)) {
-            Fragment fragment = new BannersFragment();
-            replaceFragment(fragment, BannersFragment.class.getSimpleName());
+        if (f == null || !(f instanceof GeneralCategoriesFragment)) {
+            Fragment fragment = new GeneralCategoriesFragment();
+            replaceFragment(fragment, GeneralCategoriesFragment.class.getSimpleName());
         } else {
             Timber.d("Banners already displayed.");
         }
@@ -564,8 +573,20 @@ public class MainActivity extends AppCompatActivity implements DrawerFragment.Fr
     @Override
     public void onDrawerItemCategorySelected(DrawerItemCategory drawerItemCategory) {
         clearBackStack();
-        Fragment fragment = CategoryFragment.newInstance(drawerItemCategory);
-        replaceFragment(fragment, CategoryFragment.class.getSimpleName());
+        Fragment fragment=null;
+        switch ((int) drawerItemCategory.getId()){
+            case 1:
+                onAccountSelected();
+                break;
+            case 2:
+                fragment = new GeneralCategoriesFragment();
+                replaceFragment(fragment, "CATEGORIES");
+                break;
+            default:
+                //fragment = CategoryFragment.newInstance(drawerItemCategory);
+                //replaceFragment(fragment, CategoryFragment.class.getSimpleName());
+        }
+
     }
 
     @Override
@@ -596,8 +617,14 @@ public class MainActivity extends AppCompatActivity implements DrawerFragment.Fr
      *
      * @param banner selected banner for display.
      */
-    public void onBannerSelected(Banner banner) {
-        if (banner != null) {
+    public void onBannerSelected(Banner banner) {//category selected
+        Fragment fragment = SupplierFragment.newInstance(banner.getId());
+        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            fragment.setReturnTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.fade));
+        }
+        System.err.println("Passed here");
+        replaceFragment(fragment, "Suppliers");
+        /*if (banner != null) {
             String target = banner.getTarget();
             Timber.d("Open banner with target: %s", target);
             String[] targetParams = target.split(":");
@@ -622,7 +649,7 @@ public class MainActivity extends AppCompatActivity implements DrawerFragment.Fr
             }
         } else {
             Timber.e("onBannerSelected called with null parameters.");
-        }
+        }*/
     }
 
     /**
@@ -636,6 +663,27 @@ public class MainActivity extends AppCompatActivity implements DrawerFragment.Fr
             fragment.setReturnTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.fade));
         }
         replaceFragment(fragment, ProductFragment.class.getSimpleName());
+    }
+
+    /**
+     * Launch {@link SupplierFragment}.
+     *
+     * @param supplier id of product for display.
+     */
+    public void onSupplierSelected(Supplier supplier) {
+        //Fragment fragment = CategoryFragment.newInstance(new DrawerItemCategory(supplier.getId(),supplier.getName()));
+        //replaceFragment(fragment, CategoryFragment.class.getSimpleName());
+
+        Fragment fragment = new GeneralCategoriesFragment(true,supplier.getName());
+        replaceFragment(fragment, supplier.getName());
+    }
+
+    /**
+     * Particular Supplier category selected
+     */
+    public void OnSupplierCategorySelected(Banner banner){
+        Fragment fragment = CategoryFragment.newInstance(new DrawerItemCategory(banner.getId(),banner.getName()));
+        replaceFragment(fragment, CategoryFragment.class.getSimpleName());
     }
 
     /**
@@ -734,7 +782,7 @@ public class MainActivity extends AppCompatActivity implements DrawerFragment.Fr
      */
     public void onOrderSelected(Order order) {
         if (order != null) {
-            Fragment fragment = OrderFragment.newInstance(order.getId());
+            Fragment fragment = OrderFragment.newInstance(order);
             replaceFragment(fragment, OrderFragment.class.getSimpleName());
         } else {
             Timber.e("Creating order detail with null data.");

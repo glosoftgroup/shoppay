@@ -9,9 +9,9 @@ import bf.io.openshop.entities.Metadata;
 public class ProductListResponse {
 
     private Metadata metadata;
-
     @SerializedName("records")
     private List<Product> products;
+
 
     public Metadata getMetadata() {
         return metadata;

@@ -1,5 +1,8 @@
 package bf.io.openshop.entities.drawerMenu;
 
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -13,14 +16,26 @@ public class DrawerItemCategory {
     private String name;
     private List<DrawerItemCategory> children;
     private String type;
+    private Drawable menuIcon;
 
+    //drawerItemCategory{id,name,children{this},type}
     public DrawerItemCategory() {
+
     }
 
-    public DrawerItemCategory(long id, long originalId, String name) {
-        this.id = id;
-        this.originalId = originalId;
+    public DrawerItemCategory(long id, String name,Drawable menuIcon) {
         this.name = name;
+        this.menuIcon=menuIcon;
+        this.id=id;
+    }
+
+    public DrawerItemCategory(long id,String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Drawable getMenuIcon() {
+        return menuIcon;
     }
 
     public long getId() {

@@ -64,8 +64,8 @@ public class SettingsMy {
             Timber.d("%s - Set selected shop: %s", TAG, actualShop.toString());
         else
             Timber.d("%s - Disable selected shop", TAG);
-        SettingsMy.actualShop = actualShop;
 
+        SettingsMy.actualShop = actualShop;
         String json = Utils.getGsonParser().toJson(SettingsMy.actualShop);
         SharedPreferences.Editor editor = getSettings().edit();
         editor.putString(PREF_ACTUAL_SHOP, json);

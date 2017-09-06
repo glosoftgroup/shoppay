@@ -33,7 +33,7 @@
 
 
     <!-- Products related strings -->
-    <string name="Just_arrived">Just arrived</string>
+    <string name="Just_arrived">PS254</string>
     <string name="No_banners">No banners</string>
     <string name="Show_offers">Show offers</string>
     <string name="FILTER">FILTER</string>
@@ -57,7 +57,7 @@
 
 
     <!-- User related strings -->
-    <string name="Unknown_user">Unknown user</string>
+    <string name="Unknown_user">Welcome PS254</string>
     <string name="Profile">Profile</string>
     <string name="Name_colon">Name:</string>
     <string name="Address_colon">Address:</string>
