@@ -406,7 +406,7 @@ public class ProductFragment extends Fragment {
         User user = SettingsMy.getActiveUser();
         if (user != null) {
             // determine if product is in wishlist
-            String wishlistUrl = String.format(EndPoints.WISHLIST_IS_IN_WISHLIST, SettingsMy.getActualNonNullShop(getActivity()).getId(), productId);
+            String wishlistUrl = EndPoints.WISHLIST_IS_IN_WISHLIST+productId;
             JsonRequest getWishlistInfo = new JsonRequest(Request.Method.GET, wishlistUrl, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {

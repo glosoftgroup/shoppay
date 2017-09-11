@@ -83,12 +83,13 @@ public class WishlistFragment extends Fragment {
             JSONObject jo = new JSONObject();
             try {
                 jo.put(JsonUtils.TAG_PRODUCT_VARIANT_ID, variantId);
+                jo.put("user",user.getId());
             } catch (Exception e) {
                 requestListener.requestFailed(null);
                 Timber.e(e, "Add to wishlist null product.");
                 return;
             }
-            String url = String.format(EndPoints.WISHLIST, SettingsMy.getActualNonNullShop(activity).getId());
+            String url = EndPoints.WISHLIST;
             JsonRequest req = new JsonRequest(Request.Method.POST, url, jo, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
@@ -144,7 +145,7 @@ public class WishlistFragment extends Fragment {
      */
     public static void removeFromWishList(final FragmentActivity activity, long wishlistId, User user, String requestTag, final RequestListener requestListener) {
         if (activity != null && wishlistId != 0 && user != null && requestTag != null && requestListener != null) {
-            String url = String.format(EndPoints.WISHLIST_SINGLE, SettingsMy.getActualNonNullShop(activity).getId(), wishlistId);
+            String url = EndPoints.WISHLIST_SINGLE+ wishlistId;
             JsonRequest req = new JsonRequest(Request.Method.DELETE, url, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
@@ -281,7 +282,7 @@ public class WishlistFragment extends Fragment {
      * @param user logged user.
      */
     private void getWishlistContent(@NonNull User user) {
-        String url = String.format(EndPoints.WISHLIST, SettingsMy.getActualNonNullShop(getActivity()).getId());
+        String url = EndPoints.WISHLIST;
 
         progressDialog.show();
         GsonRequest<WishlistResponse> getWishlist = new GsonRequest<>(Request.Method.GET, url, null, WishlistResponse.class,
