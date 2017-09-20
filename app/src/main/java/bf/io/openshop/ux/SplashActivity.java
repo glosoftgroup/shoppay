@@ -300,6 +300,7 @@ public class SplashActivity extends AppCompatActivity {
                 Timber.e(new RuntimeException(), "ReRunButton didn't found");
             }
             layoutCreated = true;
+            //setShopInformationAndStartMainActivity(new Shop(), null);
         } else {
             Timber.d("%s screen is already created.", this.getClass().getSimpleName());
         }
@@ -316,7 +317,7 @@ public class SplashActivity extends AppCompatActivity {
             Timber.d("Missing active shop. Show shop selection.");
             initSplashLayout();
             layoutContentNoConnection.setVisibility(View.GONE);
-            layoutContentSelectShop.setVisibility(View.VISIBLE);
+            layoutContentSelectShop.setVisibility(View.GONE);
             requestShops();
         } else {
             Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
@@ -493,7 +494,28 @@ public class SplashActivity extends AppCompatActivity {
                                     layoutContent.animate()
                                             .alpha(1f)
                                             .setDuration(1000)
-                                            .setListener(null);
+                                            .setListener(new Animator.AnimatorListener() {
+                                                @Override
+                                                public void onAnimationStart(Animator animator) {
+
+                                                }
+
+                                                @Override
+                                                public void onAnimationEnd(Animator animator) {
+                                                    Shop selectedShop = (Shop) shopSelectionSpinner.getSelectedItem();
+                                                    setShopInformationAndStartMainActivity(selectedShop, null);
+                                                }
+
+                                                @Override
+                                                public void onAnimationCancel(Animator animator) {
+
+                                                }
+
+                                                @Override
+                                                public void onAnimationRepeat(Animator animator) {
+
+                                                }
+                                            });
                                 }
                             }
                             EspressoIdlingResource.decrement();

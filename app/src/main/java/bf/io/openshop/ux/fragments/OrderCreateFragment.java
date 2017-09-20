@@ -330,7 +330,7 @@ public class OrderCreateFragment extends Fragment {
     private void getUserCart() {
         final User user = SettingsMy.getActiveUser();
         if (user != null) {
-            String url = String.format(EndPoints.CART, SettingsMy.getActualNonNullShop(getActivity()).getId());
+            String url = EndPoints.CART_INFO;
 
             progressDialog.show();
             GsonRequest<Cart> getCart = new GsonRequest<>(Request.Method.GET, url, null, Cart.class,
@@ -395,8 +395,9 @@ public class OrderCreateFragment extends Fragment {
             cartItemsTotalPrice.setText(cart.getTotalPriceFormatted());
             orderTotalPriceTv.setText(cart.getTotalPriceFormatted());
 
+
             // TODO pull to scroll could be cool here
-            String url = String.format(EndPoints.CART_DELIVERY_INFO, SettingsMy.getActualNonNullShop(getActivity()).getId());
+            String url = EndPoints.CART_DELIVERY_INFO;
 
             deliveryProgressBar.setVisibility(View.VISIBLE);
             GsonRequest<DeliveryRequest> getDelivery = new GsonRequest<>(Request.Method.GET, url, null, DeliveryRequest.class,

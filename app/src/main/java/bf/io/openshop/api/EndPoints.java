@@ -28,7 +28,7 @@ public class EndPoints {
     public static final String CART_INFO                = API_URL+"cart_info.php";
     public static final String CART_ITEM_UPDATE         = API_URL+"cart.php?update=";
     public static final String CART_ITEM_DELETE         = API_URL+"cart.php?delete=";
-    public static final String CART_DELIVERY_INFO       = API_URL.concat("%d/cart/delivery-info");
+    public static final String CART_DELIVERY_INFO       = API_URL+"delivery.php";
     public static final String CART_DISCOUNTS           = API_URL.concat("%d/cart/discounts");
     public static final String CART_DISCOUNTS_SINGLE    = API_URL.concat("%d/cart/discounts/%d");
     public static final String ORDERS                   = API_URL+"orders.php";

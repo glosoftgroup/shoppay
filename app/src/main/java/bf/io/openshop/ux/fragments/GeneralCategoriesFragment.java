@@ -194,11 +194,11 @@ public class GeneralCategoriesFragment extends Fragment {
                         progressDialog.cancel();
                     }
                 }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                if (progressDialog != null) progressDialog.cancel();
-                MsgUtils.logAndShowErrorMessage(getActivity(), error);
-            }
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    if (progressDialog != null) progressDialog.cancel();
+                    MsgUtils.logAndShowErrorMessage(getActivity(), error);
+                }
         });
         getBannersRequest.setRetryPolicy(MyApplication.getDefaultRetryPolice());
         getBannersRequest.setShouldCache(false);
@@ -208,9 +208,9 @@ public class GeneralCategoriesFragment extends Fragment {
     @Override
     public void onStop() {
         if (progressDialog != null) {
-            // Hide progress dialog if exist.
+            //Hide progress dialog if exist.
             if (progressDialog.isShowing() && endlessRecyclerScrollListener != null) {
-                // Fragment stopped during loading data. Allow new loading on return.
+                //Fragment stopped during loading data. Allow new loading on return.
                 endlessRecyclerScrollListener.resetLoading();
             }
             progressDialog.cancel();
