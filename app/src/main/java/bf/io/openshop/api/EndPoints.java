@@ -33,7 +33,7 @@ public class EndPoints {
     public static final String CART_DISCOUNTS_SINGLE    = API_URL.concat("%d/cart/discounts/%d");
     public static final String ORDERS                   = API_URL+"orders.php";
     public static final String ORDERS_SINGLE            = API_URL.concat("%d/orders/%d");
-    public static final String BRANCHES                 = API_URL.concat("%d/branches");
+    public static final String BRANCHES                 = API_URL+"branches.php";
     public static final String WISHLIST                 = API_URL+"wishlist.php";
     public static final String WISHLIST_SINGLE          = API_URL+"wishlist.php?id=";
     public static final String WISHLIST_IS_IN_WISHLIST  = API_URL+"is_in_wish_list.php?id=";

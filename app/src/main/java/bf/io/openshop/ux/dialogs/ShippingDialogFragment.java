@@ -168,7 +168,7 @@ public class ShippingDialogFragment extends DialogFragment {
     }
 
     private void getOnlyBranches() {
-        String url = String.format(EndPoints.BRANCHES, SettingsMy.getActualNonNullShop(getActivity()).getId());
+        String url = EndPoints.BRANCHES;
 
         GsonRequest<BranchesRequest> getCart = new GsonRequest<>(Request.Method.GET, url, null, BranchesRequest.class,
                 new Response.Listener<BranchesRequest>() {
@@ -206,14 +206,16 @@ public class ShippingDialogFragment extends DialogFragment {
                             shippingList.setVisibility(View.GONE);
                         }
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Timber.e("Get branches error: %s", error.getMessage());
-                setContentVisible(true);
-                MsgUtils.logAndShowErrorMessage(getActivity(), error);
-            }
-        });
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Timber.e("Get branches error: %s", error.getMessage());
+                        setContentVisible(true);
+                        MsgUtils.logAndShowErrorMessage(getActivity(), error);
+                    }
+                }
+        );
         getCart.setRetryPolicy(MyApplication.getDefaultRetryPolice());
         getCart.setShouldCache(false);
         MyApplication.getInstance().addToRequestQueue(getCart, CONST.DELIVERY_DIALOG_REQUESTS_TAG);

@@ -251,10 +251,8 @@ public class OrderCreateFragment extends Fragment {
                     public void onShippingSelected(Shipping shipping) {
                         // Save selected value
                         selectedShipping = shipping;
-
                         // Update shipping related values
                         showSelectedShipping(shipping);
-
                         // Continue for payment
                         selectedPayment = null;
                         selectedPaymentNameTv.setText(getString(R.string.Choose_payment_method));
@@ -365,7 +363,6 @@ public class OrderCreateFragment extends Fragment {
             Timber.e(new RuntimeException(), "Received null cart during order creation.");
             if (getActivity() instanceof MainActivity) ((MainActivity) getActivity()).onDrawerBannersSelected();
         } else {
-
             LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             for (int i = 0; i < cartProductItems.size(); i++) {
                 LinearLayout llRow = (LinearLayout) inflater.inflate(R.layout.order_create_cart_item, cartItemsLayout, false);
@@ -401,15 +398,15 @@ public class OrderCreateFragment extends Fragment {
 
             deliveryProgressBar.setVisibility(View.VISIBLE);
             GsonRequest<DeliveryRequest> getDelivery = new GsonRequest<>(Request.Method.GET, url, null, DeliveryRequest.class,
-                    new Response.Listener<DeliveryRequest>() {
-                        @Override
-                        public void onResponse(@NonNull DeliveryRequest deliveryResp) {
-                            Timber.d("GetDelivery: %s", deliveryResp.toString());
-                            delivery = deliveryResp.getDelivery();
-                            deliveryProgressBar.setVisibility(View.GONE);
-                            deliveryShippingLayout.setVisibility(View.VISIBLE);
-                        }
-                    }, new Response.ErrorListener() {
+                new Response.Listener<DeliveryRequest>() {
+                    @Override
+                    public void onResponse(@NonNull DeliveryRequest deliveryResp) {
+                        Timber.d("GetDelivery: %s", deliveryResp.toString());
+                        delivery = deliveryResp.getDelivery();
+                        deliveryProgressBar.setVisibility(View.GONE);
+                        deliveryShippingLayout.setVisibility(View.VISIBLE);
+                    }
+                }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Timber.e("Get request cart error: %s", error.getMessage());
@@ -455,7 +452,7 @@ public class OrderCreateFragment extends Fragment {
                     DialogFragment thankYouDF = OrderCreateSuccessDialogFragment.newInstance(false);
                     thankYouDF.show(getFragmentManager(), OrderCreateSuccessDialogFragment.class.getSimpleName());
                 }
-            }, new Response.ErrorListener() {
+            },new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     progressDialog.cancel();
@@ -468,9 +465,9 @@ public class OrderCreateFragment extends Fragment {
                     }
                 }
             }, getFragmentManager(), user.getAccessToken());
-            postOrderRequest.setRetryPolicy(MyApplication.getDefaultRetryPolice());
-            postOrderRequest.setShouldCache(false);
-            MyApplication.getInstance().addToRequestQueue(postOrderRequest, CONST.ORDER_CREATE_REQUESTS_TAG);
+                postOrderRequest.setRetryPolicy(MyApplication.getDefaultRetryPolice());
+                postOrderRequest.setShouldCache(false);
+                MyApplication.getInstance().addToRequestQueue(postOrderRequest, CONST.ORDER_CREATE_REQUESTS_TAG);
         } else {
             LoginExpiredDialogFragment loginExpiredDialogFragment = new LoginExpiredDialogFragment();
             loginExpiredDialogFragment.show(getFragmentManager(), MSG_LOGIN_EXPIRED_DIALOG_FRAGMENT);
